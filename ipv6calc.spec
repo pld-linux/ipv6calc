@@ -1,9 +1,9 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl):	Narzêdzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	0.41
+Version:	0.43
 Release:	1
-License:	GPL
+License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
 URL:		http://www.bieringer.de/linux/IPv6/ipv6calc/
@@ -47,5 +47,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README CREDITS TODO COPYING LICENSE ipv6calcweb/ipv6calcweb.cgi
+%doc ChangeLog README CREDITS TODO LICENSE ipv6calcweb/ipv6calcweb.cgi
 %attr(755,root,root) %{_bindir}/ipv6calc
