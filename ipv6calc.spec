@@ -8,7 +8,7 @@ Group:		Networking/Utilities
 Source0:	ftp://ftp.deepspace6.net/pub/ds6/sources/ipv6calc/%{name}-%{version}.tar.gz
 # Source0-md5:	70cab03d1aa6ce3a1af7fd9241c90585
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.7d
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
