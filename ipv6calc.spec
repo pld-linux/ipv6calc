@@ -5,10 +5,6 @@ Version:	0.28
 Release:	2
 License:	GPL
 Group:		Networking/Utilities
-Group(de):	Netzwerkwesen/Werkzeuge
-Group(es):	Red/Utilitarios
-Group(pl):	Sieciowe/Narzêdzia
-Group(pt_BR):	Rede/Utilitários
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
 URL:		ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
