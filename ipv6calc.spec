@@ -6,6 +6,7 @@ Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.deepspace6.net/pub/sources/ipv6calc/%{name}-%{version}.tar.gz
+# Source0-md5:	6ce6a797fe95a9480fb2e8b09171e7fb
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
 Buildrequires:	openssl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
