@@ -9,6 +9,7 @@ Source0:	ftp://ftp.deepspace6.net/pub/ds6/sources/ipv6calc/%{name}-%{version}.ta
 # Source0-md5:	70cab03d1aa6ce3a1af7fd9241c90585
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	perl-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,9 +34,10 @@ http://www.bieringer.de/linux/IPv6/ipv6calc/ .
 
 %build
 ./configure
-%{__make} CFLAGS="%{rpmcflags} -I../getopt/ -I../ -I../lib/"
+%{__make} \
+	CFLAGS="%{rpmcflags} -I../getopt/ -I../ -I../lib/"
 cd ipv6calcweb
-perl -pi -m: -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
+%{__perl} -pi -m: -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -48,5 +50,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README CREDITS TODO LICENSE doc/ipv6calc.html ipv6calcweb/ipv6calcweb.cgi
+%doc ChangeLog README CREDITS TODO doc/ipv6calc.html ipv6calcweb/ipv6calcweb.cgi
 %attr(755,root,root) %{_bindir}/ipv6calc
