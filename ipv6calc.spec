@@ -39,6 +39,7 @@ perl -pi -m: -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
+
 install ipv6calc/ipv6calc $RPM_BUILD_ROOT%{_bindir}
 
 %clean
