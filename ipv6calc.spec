@@ -29,8 +29,8 @@ http://www.bieringer.de/linux/IPv6/
 	
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d		$RPM_BUILD_ROOT%{_bindir}
+
 install ipv6calc	$RPM_BUILD_ROOT%{_bindir}
 
 gzip -9nf README TODO ChangeLog
