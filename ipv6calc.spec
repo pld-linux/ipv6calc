@@ -2,7 +2,7 @@ Summary:	IPv6 address format change and calculation utility
 Summary(pl):	Narzêdzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
 Version:	0.47
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.deepspace6.net/pub/ds6/sources/ipv6calc/%{name}-%{version}.tar.gz
