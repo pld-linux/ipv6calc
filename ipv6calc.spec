@@ -20,14 +20,14 @@ Install this package, if you want to extend the existing address
 detection on IPv6 initscript setup or make life easier in adding
 reverse IPv6 zones to DNS or using in DNS queries like nslookup -q=ANY
 `ipv6calc -r 3ffe:400:100:f101::1/48` See also here for more details:
-http://www.bieringer.de/linux/IPv6/ipv6calc/ .
+<http://www.bieringer.de/linux/IPv6/ipv6calc/>.
 
 %description -l pl
 ipv6calc to niewielkie narzêdzie formatuj±ce i przeliczaj±ce adresy
 IPv6 na ró¿ne sposoby. U³atwia ¿ycie przy dodawaniu stref odwrotnych
 IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 3ffe:400:100:f101::1/48`. Wiêcej szczegó³ów pod adresem
-http://www.bieringer.de/linux/IPv6/ipv6calc/ .
+<http://www.bieringer.de/linux/IPv6/ipv6calc/>.
 
 %prep
 %setup -q
