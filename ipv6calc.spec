@@ -1,5 +1,5 @@
 Summary:	IPv6 address format change and calculation utility
-Summary(pl):	Narz阣zie do zmiany formatu i przeliczania adres體 IPv6
+Summary(pl.UTF-8):   Narz臋dzie do zmiany formatu i przeliczania adres贸w IPv6
 Name:		ipv6calc
 Version:	0.51
 Release:	1
@@ -22,11 +22,11 @@ reverse IPv6 zones to DNS or using in DNS queries like nslookup -q=ANY
 `ipv6calc -r 3ffe:400:100:f101::1/48` See also here for more details:
 <http://www.bieringer.de/linux/IPv6/ipv6calc/>.
 
-%description -l pl
-ipv6calc to niewielkie narz阣zie formatuj眂e i przeliczaj眂e adresy
-IPv6 na r罂ne sposoby. U砤twia 縴cie przy dodawaniu stref odwrotnych
+%description -l pl.UTF-8
+ipv6calc to niewielkie narz臋dzie formatuj膮ce i przeliczaj膮ce adresy
+IPv6 na r贸偶ne sposoby. U艂atwia 偶ycie przy dodawaniu stref odwrotnych
 IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
-3ffe:400:100:f101::1/48`. Wi阠ej szczeg蟪體 pod adresem
+3ffe:400:100:f101::1/48`. Wi臋cej szczeg贸艂贸w pod adresem
 <http://www.bieringer.de/linux/IPv6/ipv6calc/>.
 
 %prep
