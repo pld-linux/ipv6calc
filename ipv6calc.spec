@@ -1,5 +1,5 @@
 Summary:	IPv6 address format change and calculation utility
-Summary(pl.UTF-8):   Narzędzie do zmiany formatu i przeliczania adresów IPv6
+Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
 Version:	0.51
 Release:	1
