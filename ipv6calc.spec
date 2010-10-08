@@ -1,12 +1,12 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	0.51
+Version:	0.80.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
-Source0:	ftp://ftp.deepspace6.net/pub/ds6/sources/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	c08c77712854ef3ba17f129a84d73ee2
+Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
+# Source0-md5:	6a34588cabf62fc01cfd246c35f9c122
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	perl-base
@@ -39,7 +39,7 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 	CFLAGS="%{rpmcflags} -I../getopt/ -I../ -I../lib/"
 
 cd ipv6calcweb
-%{__perl} -pi -m: -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
+%{__perl} -pi -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
 
 %install
 rm -rf $RPM_BUILD_ROOT
