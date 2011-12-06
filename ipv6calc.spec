@@ -1,15 +1,14 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	0.82.1
+Version:	0.92.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	323b23779723fe1608126d17d78c632e
+# Source0-md5:	0517e88f7b70d7b1f5c501ebc59e0c1c
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
-BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	perl-base
+BuildRequires:	GeoIP-devel >= 1.4.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,19 +32,14 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 %setup -q
 
 %build
-./configure
-%{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -I../getopt/ -I../ -I../lib/"
-
-cd ipv6calcweb
-%{__perl} -pi -e "s:../ipv6calc/ipv6calc:%{_bindir}/ipv6calc:" ipv6calcweb.cgi
+%configure \
+	--enable-geoip
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
-
-install ipv6calc/ipv6calc $RPM_BUILD_ROOT%{_bindir}
+%{__make} install \
+    DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,3 +48,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README CREDITS TODO doc/ipv6calc.html ipv6calcweb/ipv6calcweb.cgi
 %attr(755,root,root) %{_bindir}/ipv6calc
+%attr(755,root,root) %{_bindir}/ipv6loganon
+%attr(755,root,root) %{_bindir}/ipv6logconv
+%attr(755,root,root) %{_bindir}/ipv6logstats
+%{_mandir}/man8/ipv6calc.8*
+%{_mandir}/man8/ipv6loganon.8*
+%{_mandir}/man8/ipv6logconv.8*
+%{_mandir}/man8/ipv6logstats.8*
