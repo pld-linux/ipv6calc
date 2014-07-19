@@ -1,14 +1,20 @@
+#
+# Conditional build:
+%bcond_without	geoip		# GeoIP support
+%bcond_with	ip2location	# IP2Location support
+#
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	0.97.2
+Version:	0.97.3
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	ff9f46b598f3e7faa8068600484e4af6
+# Source0-md5:	1fc9c1a14802638f21e59408faa721a6
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
-BuildRequires:	GeoIP-devel >= 1.4.1
+%{?with_geoip:BuildRequires:	GeoIP-devel >= 1.4.1}
+%{?with_ip2location:BuildRequires:	ip2location-c-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,7 +39,9 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 
 %build
 %configure \
-	--enable-geoip
+	%{?with_geoip:--enable-geoip} \
+	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1}
+
 %{__make}
 
 %install
