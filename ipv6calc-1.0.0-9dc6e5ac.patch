@@ -1,0 +1,103 @@
+diff --git a/configure b/configure
+--- a/configure
++++ b/configure
+@@ -4297,6 +4297,38 @@ else
+ 				{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: *** missing CFLAGS support: -Wextra" >&5
+ $as_echo "$as_me: WARNING: *** missing CFLAGS support: -Wextra" >&2;}
+ 
++fi
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++		CFLAGS="$CFLAGS_SAVE"
++
++		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: *** check for CFLAGS: -Werror=format-truncation" >&5
++$as_echo "*** check for CFLAGS: -Werror=format-truncation" >&6; }
++		CFLAGS_SAVE="$CFLAGS"
++		CFLAGS="$CFLAGS -Werror=format-truncation"
++		cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++int a=1;
++int
++main ()
++{
++
++  ;
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_compile "$LINENO"; then :
++
++				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: *** CFLAGS supported: -Werror=format-truncation" >&5
++$as_echo "*** CFLAGS supported: -Werror=format-truncation" >&6; }
++				# disable errors related to format-truncation
++				CFLAGS_EXTRA="$CFLAGS_EXTRA -Werror=format-truncation=0"
++
++else
++
++				{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: *** missing CFLAGS support: -Werror=format-truncation" >&5
++$as_echo "$as_me: WARNING: *** missing CFLAGS support: -Werror=format-truncation" >&2;}
++
+ fi
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ 		CFLAGS="$CFLAGS_SAVE"
+diff --git a/configure.in b/configure.in
+--- a/configure.in
++++ b/configure.in
+@@ -135,6 +135,22 @@ AC_ARG_ENABLE([compiler-warning-to-error],
+ 				AC_MSG_WARN([*** missing CFLAGS support: -Wextra])
+ 			])
+ 		CFLAGS="$CFLAGS_SAVE"
++
++		AC_MSG_RESULT([*** check for CFLAGS: -Werror=format-truncation])
++		CFLAGS_SAVE="$CFLAGS"
++		CFLAGS="$CFLAGS -Werror=format-truncation"
++		AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
++			     [[int a=1;]])
++			],
++			[
++				AC_MSG_RESULT([*** CFLAGS supported: -Werror=format-truncation])
++				# disable errors related to format-truncation
++				CFLAGS_EXTRA="$CFLAGS_EXTRA -Werror=format-truncation=0"
++			],
++			[
++				AC_MSG_WARN([*** missing CFLAGS support: -Werror=format-truncation])
++			])
++		CFLAGS="$CFLAGS_SAVE"
+ 	])
+ 
+ dnl *************************************************
+diff --git a/databases/lib/libipv6calc_db_wrapper_DBIP.c b/databases/lib/libipv6calc_db_wrapper_DBIP.c
+--- a/databases/lib/libipv6calc_db_wrapper_DBIP.c
++++ b/databases/lib/libipv6calc_db_wrapper_DBIP.c
+@@ -786,8 +786,7 @@ char *libipv6calc_db_wrapper_DBIP_database_info(const unsigned int type) {
+ 	};
+ 
+ 	char year[5];
+-	strncpy(year, datastring, 4);
+-	year[4] = '\0';
++	snprintf(year, sizeof(year), "%s", datastring);
+ 	snprintf(resultstring, sizeof(resultstring), "DBIP-%d/%s %s Copyright (c) %s db-ip.com All Rights Reserved"
+ 		, type
+ 		, datastring
+diff --git a/ipv6calc/ipv6calc.c b/ipv6calc/ipv6calc.c
+index 2eb8ebc..9c961c2 100644
+--- a/ipv6calc/ipv6calc.c
++++ b/ipv6calc/ipv6calc.c
+@@ -1941,7 +1941,7 @@ PIPE_input:
+ 
+ 			if ((formatoptions & FORMATOPTION_print_iid_var) == FORMATOPTION_print_iid_var) {
+ 				iid_random_result = ipv6addr_iidrandomdetection(&ipv6addr, &iid_statistics);
+-				sprintf(resultstring2, "%-40s R=%d h=%7.3f r=%7.3f db= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dbh= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d da= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dd= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dda= %d", resultstring, \
++				snprintf(resultstring2, sizeof(resultstring2), "%-40s R=%d h=%7.3f r=%7.3f db= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dbh= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d da= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dd= %d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d dda= %d", resultstring, \
+ 					iid_random_result, iid_statistics.hexdigit, iid_statistics.lls_residual, \
+ 					iid_statistics.digit_blocks[0], iid_statistics.digit_blocks[1], iid_statistics.digit_blocks[2], iid_statistics.digit_blocks[3], iid_statistics.digit_blocks[4], iid_statistics.digit_blocks[5], iid_statistics.digit_blocks[6], iid_statistics.digit_blocks[7], iid_statistics.digit_blocks[8], iid_statistics.digit_blocks[9], iid_statistics.digit_blocks[10], iid_statistics.digit_blocks[11], iid_statistics.digit_blocks[12], iid_statistics.digit_blocks[13], iid_statistics.digit_blocks[14], iid_statistics.digit_blocks[15], \
+ 					iid_statistics.digit_blocks_hexdigit[0], iid_statistics.digit_blocks_hexdigit[1], iid_statistics.digit_blocks_hexdigit[2], iid_statistics.digit_blocks_hexdigit[3], iid_statistics.digit_blocks_hexdigit[4], iid_statistics.digit_blocks_hexdigit[5], iid_statistics.digit_blocks_hexdigit[6], iid_statistics.digit_blocks_hexdigit[7], iid_statistics.digit_blocks_hexdigit[8], iid_statistics.digit_blocks_hexdigit[9], iid_statistics.digit_blocks_hexdigit[10], iid_statistics.digit_blocks_hexdigit[11], iid_statistics.digit_blocks_hexdigit[12], iid_statistics.digit_blocks_hexdigit[13], iid_statistics.digit_blocks_hexdigit[14], iid_statistics.digit_blocks_hexdigit[15], \
+@@ -1950,7 +1950,7 @@ PIPE_input:
+ 					iid_statistics.digit_delta[16], iid_statistics.digit_delta[17], iid_statistics.digit_delta[18], iid_statistics.digit_delta[19], iid_statistics.digit_delta[20], iid_statistics.digit_delta[21], iid_statistics.digit_delta[22], iid_statistics.digit_delta[23], iid_statistics.digit_delta[24], iid_statistics.digit_delta[25], iid_statistics.digit_delta[26], iid_statistics.digit_delta[27], iid_statistics.digit_delta[28], iid_statistics.digit_delta[29], iid_statistics.digit_delta[30], \
+ 					iid_statistics.digit_delta_amount
+ 				);
+-				sprintf(resultstring, "%s", resultstring2);
++				snprintf(resultstring, sizeof(resultstring), "%s", resultstring2);
+ 			};
+ 			break;
+ 
