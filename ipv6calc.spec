@@ -6,13 +6,12 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	1.0.0
+Version:	1.1.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	6eed2e5b8ca07330e044d809ade3b565
-Patch0:		ipv6calc-1.0.0-9dc6e5ac.patch
+# Source0-md5:	3586b063f92865646a0da4a6ac339dbd
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
 %{?with_geoip:BuildRequires:	GeoIP-devel >= 1.4.1}
 %{?with_ip2location:BuildRequires:	ip2location-c-devel}
@@ -37,7 +36,6 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure \
@@ -56,11 +54,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README CREDITS TODO doc/ipv6calc.html ipv6calcweb/ipv6calcweb.cgi
+%doc ChangeLog CHANGES CREDITS examples/ INSTALLING README* TODO USAGE doc/ipv6calc.html ipv6calcweb/ipv6calcweb.cgi
 %attr(755,root,root) %{_bindir}/ipv6calc
 %attr(755,root,root) %{_bindir}/ipv6loganon
 %attr(755,root,root) %{_bindir}/ipv6logconv
 %attr(755,root,root) %{_bindir}/ipv6logstats
+%{_datadir}/%{name}
 %{_mandir}/man8/ipv6calc.8*
 %{_mandir}/man8/ipv6loganon.8*
 %{_mandir}/man8/ipv6logconv.8*
