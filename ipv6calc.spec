@@ -6,13 +6,15 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	3.2.0
-Release:	1
+Version:	4.0.0
+Release:	0.1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	1ab990ccdac657fd5b2a61b2abcf3eb0
+# Source0-md5:	a602e1f947a8de6f84331f98c09d5443
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
+BuildRequires:	perl-HTML-Parser
+BuildRequires:	perl-Digest-SHA1
 %{?with_geoip:BuildRequires:	GeoIP-devel >= 1.4.1}
 %{?with_ip2location:BuildRequires:	ip2location-c-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,9 +40,11 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 %setup -q
 
 %build
+#CFLAGS="%{rpmcflags}"
+#CXXFLAGS="%{rpmcxxflags}"
 %configure \
 	%{!?with_geoip:--disable-geoip2} \
-	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1}
+	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1} 
 
 %{__make}
 
