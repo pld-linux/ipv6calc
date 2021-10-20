@@ -40,18 +40,19 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 %setup -q
 
 %build
-#CFLAGS="%{rpmcflags}"
-#CXXFLAGS="%{rpmcxxflags}"
 %configure \
 	%{!?with_geoip:--disable-geoip2} \
 	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1} 
 
+# makefiles don't propagate configure CFLAGS nor CFLAGS from initial make environment
+export CFLAGS="%{rpmcflags} %{rpmcppflags}"
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
-    DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
