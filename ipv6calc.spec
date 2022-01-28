@@ -6,12 +6,12 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	4.0.0
+Version:	4.0.1
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	a602e1f947a8de6f84331f98c09d5443
+# Source0-md5:	b5269b9ade885b787471ac2301f32b94
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	perl-Digest-SHA1
