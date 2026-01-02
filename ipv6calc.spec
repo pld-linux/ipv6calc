@@ -6,17 +6,17 @@
 Summary:	IPv6 address format change and calculation utility
 Summary(pl.UTF-8):	Narzędzie do zmiany formatu i przeliczania adresów IPv6
 Name:		ipv6calc
-Version:	4.1.0
+Version:	4.4.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/%{name}-%{version}.tar.gz
-# Source0-md5:	4891e8f53606c78c77a8185fe1b02fde
+# Source0-md5:	391cf949f7622a7bf10368637068e15b
 URL:		http://www.deepspace6.net/projects/ipv6calc.html
-BuildRequires:	perl-HTML-Parser
-BuildRequires:	perl-Digest-SHA1
 %{?with_geoip:BuildRequires:	GeoIP-devel >= 1.4.1}
 %{?with_ip2location:BuildRequires:	ip2location-c-devel}
+BuildRequires:	perl-Digest-SHA1
+BuildRequires:	perl-HTML-Parser
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,10 +42,8 @@ IPv6 do DNS lub odpytywaniu w rodzaju nslookup -q=ANY `ipv6calc -r
 %build
 %configure \
 	%{!?with_geoip:--disable-geoip2} \
-	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1} 
+	%{?with_ip2location:--enable-ip2location --with-ip2location-dyn-lib=libIP2Location.so.1}
 
-# makefiles don't propagate configure CFLAGS nor CFLAGS from initial make environment
-export CFLAGS="%{rpmcflags} %{rpmcppflags}"
 %{__make}
 
 %install
